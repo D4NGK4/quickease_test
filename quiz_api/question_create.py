@@ -9,13 +9,16 @@ client = OpenAI(api_key=os.environ.get('OPENAI_API_KEY'))
 
 def generate_questions(paragraph):
     prompt = (
-        f"Convert the following paragraph into at least 10 questions with thier descriptions."
-        f'''Generate the questions with the following structure:
-        
-        "Question":"What is your name?",
-        "Question":"Where are you from?",
-        "Question":"Who are you?",
-        
+        f"Convert the following paragraph into at least 10 questions."
+        '''Generate the questions with the following structure:
+        [
+            {
+                "Question": "What is your name?"
+            },
+            {
+                "Question": "What is your name?"
+            }
+    ]
         '''
         f"The format must only be in JSON format."
         f"Only JSON data is required. No other decoraters like ``` are needed."
@@ -31,7 +34,6 @@ def generate_questions(paragraph):
         temperature=0.7,
     )
     
-    flashcards_text = response.choices[0].message.content
+    question_text = response.choices[0].message.content
 
-    return flashcards_text
-
+    return question_text

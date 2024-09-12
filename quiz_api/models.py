@@ -10,8 +10,8 @@ from django.utils.translation import gettext_lazy as _
 
 class UserTest(models.Model):
     note = models.OneToOneField(UserNotes, on_delete=models.CASCADE, primary_key=True)
-    TestScore = models.IntegerField()
-    TestTotalScore = models.IntegerField()
+    TestScore = models.IntegerField(default=0)
+    TestTotalScore = models.IntegerField(default=0)
     TestDateCreated = models.DateTimeField(auto_now_add=True)
     
     class Meta: 
@@ -32,7 +32,7 @@ class TestQuestion(models.Model):
         verbose_name_plural = _("Test Questions")
 
     def __str__(self):
-        return str(self.test)
+        return str(self.TestQuestion)
     
 
 # Test Choices Model
@@ -47,7 +47,7 @@ class TestChoices(models.Model):
         verbose_name_plural = _("Test Choices")
 
     def __str__(self):
-        return str(self.question)
+        return str(self.question) + str(self.isAnswer)
     
 # Choice Answer Model
     

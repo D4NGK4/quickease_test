@@ -12,11 +12,17 @@ def generate_choices(question):
         f"Create six(6) choices for the following question: {question}. "
         "Generate the choices with the following structure:"
         '''
-        
-        "choice":"Question description",
-        "isAnswer":False
-        
-        '''
+        [
+            {
+                "choice": "Choice description",
+                "isAnswer": false
+            },
+            {
+                "choice": "Choice description",
+                "isAnswer": true
+            }
+        ]
+            '''
         "There should only be one(1) correct answer."
         "The format must only be in JSON format."
         "Only JSON data is required. No other decoraters like ``` are needed."
@@ -32,7 +38,7 @@ def generate_choices(question):
         temperature=0.7,
     )
     
-    flashcards_text = response.choices[0].message.content
+    choice_text = response.choices[0].message.content
 
-    return flashcards_text
+    return choice_text
 
