@@ -29,6 +29,7 @@ urlpatterns = [
     path('question/<int:question_id>/', UserTestQuestionDetailView.as_view(), name='question-detail'),
     
     # Question Choices
+    # use usertest/choices/0/ to show all choices
      path('usertest/choices/<int:question_id>/', UserTestChoicesListView.as_view(), name='user-test-choices'),
      path('usertest/choice-create/<int:question_id>/', CreateQuestionChoicesView.as_view(), name='user-test-choice-create'),
      path('usertest/choice-detail/<int:choice_id>/', UserTestChoiceDetailView.as_view(), name='user-test-choice-detail'),
