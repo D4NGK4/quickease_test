@@ -11,7 +11,7 @@ from .serializers import (  UserTestSerializer,
 )
 from summarizer_api.models import UserNotes  
 
-#LIST VIEWS
+#Normal VIEWS
 
 class UserTestListView(generics.ListAPIView):
     serializer_class = UserTestSerializer
@@ -61,7 +61,7 @@ class ChoiceAnswerListView(generics.ListAPIView):
         return ChoiceAnswer.objects.filter(answer__question__test__note__user=user)
         
 
-#CREATE VIEWS
+#create views
 
 class CreateTestView(generics.CreateAPIView):
     serializer_class = UserTestSerializer
@@ -131,7 +131,7 @@ class CreateChoiceAnswerView(generics.CreateAPIView):
         serializer = ChoiceAnswerSerializer(choice_answer)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     
-#RETRIEVEUPDATEDESTROY VIEWS
+#retrieveupdatedestroy views
 
 class UserTestRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = UserTestSerializer
