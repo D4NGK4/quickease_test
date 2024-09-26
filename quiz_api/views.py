@@ -132,6 +132,7 @@ class CreateChoiceAnswerView(generics.CreateAPIView):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     
 #RETRIEVEUPDATEDESTROY VIEWS
+
 class UserTestRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = UserTestSerializer
     permission_classes = [IsAuthenticated]
