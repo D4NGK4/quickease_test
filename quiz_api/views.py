@@ -34,6 +34,7 @@ class UserTestQuestionListView(generics.ListAPIView):
             return TestQuestion.objects.filter(test=user_test)
         return TestQuestion.objects.filter(test__note__user=user)
         
+
 class UserTestChoicesListView(generics.ListAPIView):
     serializer_class = TestChoicesSerializer
     permission_classes = [IsAuthenticated]
@@ -167,3 +168,49 @@ class ChoiceAnswerDetailView(generics.RetrieveUpdateDestroyAPIView):
             answer__question__test__note__user=self.request.user
         )
     
+#Custom Views
+
+class QuestionByNoteView(generics.ListAPIView):
+    serializer_class = TestQuestionSerializer
+    permission_classes = [IsAuthenticated]
+    
+    def get_queryset(self):
+        note_id = self.kwargs.get('note_id')
+        user = self.request.user
+        if note_id != 0:
+            return TestQuestion.objects.filter(test__note__id=note_id)
+        return TestQuestion.objects.filter(test__note__user=user)
+    
+
+class AnswerByQuestionView(generics.ListAPIView):
+    serializer_class = ChoiceAnswerSerializer
+    permission_classes = [IsAuthenticated]
+    
+    def get_queryset(self):
+        question_id = self.kwargs.get('question_id')
+        user = self.request.user
+        if question_id != 0:
+            return ChoiceAnswer.objects.filter(answer__question__id=question_id)
+        return ChoiceAnswer.objects.filter(answer__question__test__note__user=user)
+
+class AnswerByNoteView(generics.ListAPIView):
+    serializer_class = ChoiceAnswerSerializer
+    permission_classes = [IsAuthenticated]
+    
+    def get_queryset(self):
+        note_id = self.kwargs.get('note_id')
+        user = self.request.user
+        if note_id != 0:
+            return ChoiceAnswer.objects.filter(answer__question__test__note__id=note_id)
+        return ChoiceAnswer.objects.filter(answer__question__test__note__user=user)
+    
+class ChoicesByNoteView(generics.ListAPIView):
+    serializer_class = TestChoicesSerializer
+    permission_classes = [IsAuthenticated]
+    
+    def get_queryset(self):
+        note_id = self.kwargs.get('note_id')
+        user = self.request.user
+        if note_id != 0:
+            return TestChoices.objects.filter(question__test__note__id=note_id)
+        return TestChoices.objects.filter(question__test__note__user=user)
