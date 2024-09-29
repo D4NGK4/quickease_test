@@ -31,7 +31,7 @@ urlpatterns = [
     # Use usertest/questions/0/ to show all questions
     path('usertest/questions/<int:note_id>/', UserTestQuestionListView.as_view(), name='user-test-questions'),
     path('questions/create/<note_id>/', CreateTestQuestionView.as_view(), name='questions-create'),
-    path('question/<int:question_id>/', UserTestQuestionDetailView.as_view(), name='question-detail'),
+    path('question-detail/<int:question_id>/', UserTestQuestionDetailView.as_view(), name='question-detail'),
     
     # Question Choices
     # We can filter choices by question using the question_id, put 0 to get all choices
@@ -44,7 +44,7 @@ urlpatterns = [
     # use usertest/choice-answers/0/ to show all choices
     path('choice-answers/<int:choice_id>/', ChoiceAnswerListView.as_view(), name='choice-answer-list'),
     path('choice-answer/create/<int:choice_id>/', CreateChoiceAnswerView.as_view(), name='choice-answer-create'),
-    path('choice-answer/<int:choice_id>/', ChoiceAnswerDetailView.as_view(), name='choice-answer-detail'),
+    path('choice-answer-detail/<int:choice_id>/', ChoiceAnswerDetailView.as_view(), name='choice-answer-detail'),
     
     #Custom Views
     path('answer-by-question/<int:question_id>/', AnswerByQuestionView.as_view(), name='answer-by-question'),
