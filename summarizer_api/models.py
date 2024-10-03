@@ -7,7 +7,7 @@ from .title_generator import generate_title
 # Create your models here.
 
 class UserNotes(models.Model):
-    notetitle = models.CharField(_("Note Title"), max_length=30, default="")
+    notetitle = models.TextField(_("Note Title"), default="")
     notecontents = models.TextField(_("Note Contents"))
     notedatecreated = models.DateTimeField(auto_now_add=True)
     notesummary = models.TextField(_("Note Summary"), blank=True, null=True)
