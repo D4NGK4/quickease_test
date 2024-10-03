@@ -58,7 +58,7 @@ class ChoiceAnswerListView(generics.ListAPIView):
         choice_id = self.kwargs.get('choice_id')
         user = self.request.user
         if choice_id != 0: 
-            return ChoiceAnswer.objects.filter(answer__question__id=choice_id)
+            return ChoiceAnswer.objects.filter(answer__question__id=choice_id, answer__question__test__note__user=user)
         return ChoiceAnswer.objects.filter(answer__question__test__note__user=user)
         
 
@@ -178,7 +178,7 @@ class QuestionByNoteView(generics.ListAPIView):
         note_id = self.kwargs.get('note_id')
         user = self.request.user
         if note_id != 0:
-            return TestQuestion.objects.filter(test__note__id=note_id)
+            return TestQuestion.objects.filter(test__note__id=note_id, test__note__user=user)
         return TestQuestion.objects.filter(test__note__user=user)
     
 
@@ -190,7 +190,7 @@ class AnswerByQuestionView(generics.ListAPIView):
         question_id = self.kwargs.get('question_id')
         user = self.request.user
         if question_id != 0:
-            return ChoiceAnswer.objects.filter(answer__question__id=question_id)
+            return ChoiceAnswer.objects.filter(answer__question__id=question_id, answer__question__test__note__user=user)
         return ChoiceAnswer.objects.filter(answer__question__test__note__user=user)
 
 class AnswerByNoteView(generics.ListAPIView):
@@ -201,7 +201,7 @@ class AnswerByNoteView(generics.ListAPIView):
         note_id = self.kwargs.get('note_id')
         user = self.request.user
         if note_id != 0:
-            return ChoiceAnswer.objects.filter(answer__question__test__note__id=note_id)
+            return ChoiceAnswer.objects.filter(answer__question__test__note__id=note_id, answer__question__test__note__user=user)
         return ChoiceAnswer.objects.filter(answer__question__test__note__user=user)
     
 class ChoicesByNoteView(generics.ListAPIView):
@@ -212,5 +212,5 @@ class ChoicesByNoteView(generics.ListAPIView):
         note_id = self.kwargs.get('note_id')
         user = self.request.user
         if note_id != 0:
-            return TestChoices.objects.filter(question__test__note__id=note_id)
+            return TestChoices.objects.filter(question__test__note__id=note_id, question__test__note__user=user)
         return TestChoices.objects.filter(question__test__note__user=user)

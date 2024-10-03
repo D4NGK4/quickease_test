@@ -26,4 +26,5 @@ urlpatterns = [
     path("", include('pomodoro_api.urls')),
     path("flashcards_api/v1/", include('flashcards_api.urls')),
     path("quiz_api/v1/", include('quiz_api.urls')),
+    path("badges_api/v1/", include('badges_api.urls')),
 ]
