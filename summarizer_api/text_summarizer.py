@@ -4,6 +4,7 @@ from openai import OpenAI
 import tiktoken
 from tqdm import tqdm
 from dotenv import load_dotenv
+from .summarizer_fixer import fix_summary
 
 load_dotenv()
 
@@ -153,6 +154,8 @@ def summarize(text: str,
 
     # Compile final summary from partial summaries
     final_summary = '\n\n'.join(accumulated_summaries)
+    
+    fixed_final = fix_summary(final_summary)
 
-    return final_summary
+    return fixed_final
 
